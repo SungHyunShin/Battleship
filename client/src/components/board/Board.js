@@ -10,10 +10,16 @@ export default function Board({ hovered, selectedPieceId, vertical, board, onPla
         let boardRow = []
         for (let j = 0; j < 10; j++) {
             boardRow.push(
-                <Square key={i.toString()+j.toString()} onHover={()=>onHover(i,j)} hovered={hovered[i][j]} onClickFunc={() => onPlace()} pieceSet={board[i][j]} />
+                <Square
+                    key={i.toString() + j.toString()}
+                    onHover={() => onHover(i, j)}
+                    hovered={hovered[i][j]}
+                    onClickFunc={() => onPlace(i, j)}
+                    pieceSet={board[i][j]}
+                />
             );
         }
-        boardBuild.push(<div key={`row${i.toString()}`}className="boardRow">{boardRow}</div>);
+        boardBuild.push(<div key={`row${i.toString()}`} className="boardRow">{boardRow}</div>);
     }
 
     return <span className="board">{boardBuild}</span>;

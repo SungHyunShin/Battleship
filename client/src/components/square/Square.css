@@ -1,0 +1,39 @@
+.square {
+    height: 8vmin;
+    width: 8vmin;
+    border: 1px solid #999;
+    min-width: 20px;
+    min-height: 20px;
+    background-color: white;
+}
+
+.hovered{
+    background-color: wheat;
+}
+
+.small{
+    height: 4vmin;
+    width: 4vmin;
+    min-width: 10px;
+    min-height: 10px;
+}
+
+.shipZero{
+    background-color:darkblue;
+}
+
+.shipOne{
+    background-color:green;
+}
+
+.shipTwo{
+    background-color:purple;
+}
+
+.shipThree{
+    background-color:pink;
+}
+
+.shipFour{
+    background-color:darkred;
+}

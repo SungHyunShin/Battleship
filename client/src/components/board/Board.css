@@ -1,0 +1,13 @@
+.boardRow {
+    height: 8vmin;
+    min-height: 20px;
+    min-width: 200px;
+}
+
+.board {
+    height: 80vmin;
+    width: 80vmin;
+    padding: 10px;
+    min-height: 200px;
+    min-width: 200px;
+}

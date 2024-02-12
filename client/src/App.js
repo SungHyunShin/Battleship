@@ -15,6 +15,40 @@ export default function App() {
   const [selectedPieceId, setSelectedPieceId] = React.useState(0)
   const [vertical, setVertical] = React.useState(false)
 
+  const randomize = React.useCallback(() => {
+    fetch("/random")
+      .then((res) => res.json())
+      .then((piecesList) => {
+        let placeVars = place(piecesList);
+        setBoardState(placeVars[0]);
+        setPieces(placeVars[1]);
+      });
+  }, []);
+
+  function place(placeQueue) {
+    let newBoard = [];
+    let newPieces = pieces.slice();
+    for (let i = 0; i < boardState.length; i++) {
+      newBoard[i] = boardState[i].slice();
+    }
+    for (let x = 0; x < placeQueue.length; x++) {
+      // place for each command
+      let i = placeQueue[x][0];
+      let j = placeQueue[x][1];
+      let v = placeQueue[x][2]
+      for (let y = 0; y < PIECE_SIZES[x]; y++) {
+        if (v) {
+          newBoard[i + y][j] = x
+        }
+        else {
+          newBoard[i][j + y] = x
+        }
+      }
+      newPieces[x] = [i, j, true, v]
+    }
+    return [newBoard, newPieces];
+  }
+
   function onPlace(clickI, clickJ) {
     let newBoardState = []
     let pieceSize = PIECE_SIZES[selectedPieceId];
@@ -73,7 +107,6 @@ export default function App() {
   }
 
   function onHover(i, j) {
-    console.log(boardState[i][j], PIECE_NAMES[boardState[i][j]]);
     let pieceSize = PIECE_SIZES[selectedPieceId];
     let currHover = [...Array(10)].map(_ => Array(10).fill(false));
     // bounding
@@ -91,17 +124,11 @@ export default function App() {
     }
     setHovered(currHover);
   }
-  /*
-    React.useEffect(() => {
-      fetch("/api")
-        .then((res) => res.json())
-        .then((data) => setData(data.message));
-    }, []);
-  */
+
   return (
     <div className="App">
       <Board hovered={hovered} selectedPieceId={selectedPieceId} vertical={vertical} board={boardState} onPlace={onPlace} onHover={onHover} />
-      <SelectionPanel selectedPieceId={selectedPieceId} setSelectedPieceId={setSelectedPieceId} vertical={vertical} setVertical={setVertical} />
+      <SelectionPanel selectedPieceId={selectedPieceId} setSelectedPieceId={setSelectedPieceId} vertical={vertical} setVertical={setVertical} randomize={randomize} />
     </div>
   );
 }

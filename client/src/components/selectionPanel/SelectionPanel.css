@@ -1,43 +1,43 @@
-.selectionPanel{
+.selectionPanel {
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.titleText{
-    font-size:x-large;
+.titleText {
+    font-size: x-large;
     margin-bottom: 20px;
     font-weight: bolder;
 }
 
-.text{
-    font-size:large;
+.text {
+    font-size: large;
 }
 
-.rotateContainer{
+.rotateContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.rotateButton{
+.rotateButton {
     height: 40px;
     width: 40px;
     display: flex;
     margin-left: 5px;
 }
 
-.rotateButtonImage{
-    width:100%;
-    height:100%;
+.rotateButtonImage {
+    width: 100%;
+    height: 100%;
 }
 
-.selected{
+.selected {
     background-color: wheat;
 }
 
-.pieceRow{
+.pieceRow {
     padding: 5px;
 }

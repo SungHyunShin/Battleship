@@ -3,9 +3,9 @@ import classnames from "classnames";
 import React from "react";
 import { PIECE_NAMES } from "../../constants/constants"
 
-export default function Square({ onHover, onClickFunc, pieceSet, hovered, small, shipName}) {
+export default function Square({ onHover, onClickFunc, pieceSet, hovered, small, shipName }) {
     let placedShip = null;
-    if(pieceSet!==-1 || pieceSet !== null){
+    if (pieceSet !== -1 || pieceSet !== null) {
         placedShip = PIECE_NAMES[pieceSet]
     }
     return (

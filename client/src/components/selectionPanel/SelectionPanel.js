@@ -5,7 +5,7 @@ import "./SelectionPanel.css"
 import classnames from "classnames";
 
 
-export default function SelectionPanel({ selectedPieceId, setSelectedPieceId, vertical, setVertical, randomize}) {
+export default function SelectionPanel({ selectedPieceId, setSelectedPieceId, vertical, setVertical, randomize }) {
     let pieces = []
     for (let i = 0; i < PIECE_SIZES.length; i++) {
         let piece = []
@@ -21,7 +21,7 @@ export default function SelectionPanel({ selectedPieceId, setSelectedPieceId, ve
                 <div className="rotateContainer">
                     <div className="text"> Rotate: {vertical ? "Vertical" : "Horizontal"}</div>
                     <button className="rotateButton" onClick={() => setVertical(!vertical)}>
-                        <img className="rotateButtonImage" src={require("../../assets/rotate.png")} />
+                        <img className="rotateButtonImage" src={require("../../assets/rotate.png")} alt="Rotate" />
                     </button>
                 </div>
                 <div>

@@ -1,12 +1,34 @@
 // client/src/App.js
 
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Board from "./components/board/Board";
 import SelectionPanel from "./components/selectionPanel/SelectionPanel";
-import { PIECE_NAMES, PIECE_SIZES } from "./constants/constants"
+import { PIECE_SIZES } from "./constants/constants"
 
+function place(placeQueue, oldBoard, pieces) {
+  let newBoard = [];
+  let newPieces = pieces.slice();
+  for (let i = 0; i < oldBoard.length; i++) {
+    newBoard[i] = oldBoard[i].slice();
+  }
+  for (let x = 0; x < placeQueue.length; x++) {
+    // place for each command
+    let i = placeQueue[x][0];
+    let j = placeQueue[x][1];
+    let v = placeQueue[x][2]
+    for (let y = 0; y < PIECE_SIZES[x]; y++) {
+      if (v) {
+        newBoard[i + y][j] = x
+      }
+      else {
+        newBoard[i][j + y] = x
+      }
+    }
+    newPieces[x] = [i, j, true, v]
+  }
+  return [newBoard, newPieces];
+}
 
 export default function App() {
   const [boardState, setBoardState] = React.useState([...Array(10)].map(_ => Array(10).fill(-1)));
@@ -19,35 +41,11 @@ export default function App() {
     fetch("/random")
       .then((res) => res.json())
       .then((piecesList) => {
-        let placeVars = place(piecesList);
+        let placeVars = place(piecesList, boardState, pieces);
         setBoardState(placeVars[0]);
         setPieces(placeVars[1]);
       });
-  }, []);
-
-  function place(placeQueue) {
-    let newBoard = [];
-    let newPieces = pieces.slice();
-    for (let i = 0; i < boardState.length; i++) {
-      newBoard[i] = boardState[i].slice();
-    }
-    for (let x = 0; x < placeQueue.length; x++) {
-      // place for each command
-      let i = placeQueue[x][0];
-      let j = placeQueue[x][1];
-      let v = placeQueue[x][2]
-      for (let y = 0; y < PIECE_SIZES[x]; y++) {
-        if (v) {
-          newBoard[i + y][j] = x
-        }
-        else {
-          newBoard[i][j + y] = x
-        }
-      }
-      newPieces[x] = [i, j, true, v]
-    }
-    return [newBoard, newPieces];
-  }
+  }, [boardState, pieces]);
 
   function onPlace(clickI, clickJ) {
     let newBoardState = []
@@ -57,7 +55,7 @@ export default function App() {
       newBoardState[i] = boardState[i].slice();
     }
     // check if the piece is already placed
-    if (pieces[selectedPieceId][2] == true) {
+    if (pieces[selectedPieceId][2] === true) {
       // remove piece from board
       let i = pieces[selectedPieceId][0];
       let j = pieces[selectedPieceId][1];

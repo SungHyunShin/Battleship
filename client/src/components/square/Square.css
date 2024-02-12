@@ -7,33 +7,33 @@
     background-color: white;
 }
 
-.hovered{
+.hovered {
     background-color: wheat;
 }
 
-.small{
+.small {
     height: 4vmin;
     width: 4vmin;
     min-width: 10px;
     min-height: 10px;
 }
 
-.shipZero{
-    background-color:darkblue;
+.shipZero {
+    background-color: darkblue;
 }
 
-.shipOne{
-    background-color:green;
+.shipOne {
+    background-color: green;
 }
 
-.shipTwo{
-    background-color:purple;
+.shipTwo {
+    background-color: purple;
 }
 
-.shipThree{
-    background-color:pink;
+.shipThree {
+    background-color: pink;
 }
 
-.shipFour{
-    background-color:darkred;
+.shipFour {
+    background-color: darkred;
 }

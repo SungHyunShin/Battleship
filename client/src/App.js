@@ -41,11 +41,11 @@ export default function App() {
     fetch("/random")
       .then((res) => res.json())
       .then((piecesList) => {
-        let placeVars = place(piecesList, boardState, pieces);
+        let placeVars = place(piecesList, [...Array(10)].map(_ => Array(10).fill(-1)), pieces);
         setBoardState(placeVars[0]);
         setPieces(placeVars[1]);
       });
-  }, [boardState, pieces]);
+  }, [pieces]);
 
   function onPlace(clickI, clickJ) {
     let newBoardState = []
